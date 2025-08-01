@@ -8,9 +8,6 @@ use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return response()->json(Categoria::all());
@@ -21,14 +18,12 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //validate the request
         $request->validate([
             'nombre' => 'required',
             'descripcion' => 'nullable',
         ]);
         $categoria = Categoria::create($request->all());
 
-        //return the created category
         return response()->json([
             'mensage' => 'Categoria creada exitosamente',
             'categoria' => $categoria
@@ -40,8 +35,8 @@ class CategoriaController extends Controller
      */
     public function show(string $id)
     {
-        //        $categoria = Categoria::find($id);
-        $categoria = Categoria::findOrFail($id);
+        //
+        $categoria = Categoria::find($id);
 
         if (!$categoria) {
             return response()->json([
@@ -60,7 +55,6 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //validate the request
         $request->validate([
             'nombre' => 'required',
             'descripcion' => 'nullable',
